@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+D:\kang\network\.metadata\.plugins\org.eclipse.jdt.core
-782528738.index
-3823697542.index

@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
-// 편집기
+// 편집기(추가)
 public class MyClient {
 	public static void main(String[] args) {
 		BufferedReader in = null; // 입력 스트림

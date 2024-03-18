@@ -2,7 +2,7 @@ package sec2;
 // 프로세스 제어 명령
 // Thread = 프로세스(process) = 현재 컴퓨터에서 실행 중인 프로그램 작업(프로그램)
 // 발생(New) => (실행대기 : Runnable) => cpu점유(실행 : run) =>(sleep) (실행대기 : Runnable) => (기동) => 종료
-// 실행 => 실행대기 : sleep
+// 실행 => 실행대기 : sleep(Runnable)
 // 실행대기 => 실행 : wake up(run)
 public class ThreadExam1 {
 	

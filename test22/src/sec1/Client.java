@@ -1,4 +1,4 @@
-package test22;
+package sec1;
 //1:1채팅
 import java.io.BufferedReader;
 import java.io.IOException;

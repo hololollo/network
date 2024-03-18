@@ -18,7 +18,7 @@ public class NetworkExam1 {
 		System.out.println("도메인 네임(Domain Name) : 해당 서버에 연결하여 서비스를 받고자 할 경우 IP주소를 외우기 힘드므로 짧게 쉬운 단어로 지정하여 사용");
 		System.out.println("URL(Uniform Resource Locator) : 자원의 위치 및 주소를 의미한다.");
 		
-		System.out.println("");
+		System.out.println("네트워크 용어");
 	}
 
 }

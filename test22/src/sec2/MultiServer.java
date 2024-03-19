@@ -22,7 +22,7 @@ public class MultiServer {
 		Socket socket = null;
 		
 		try {
-			server = new ServerSocket(8257);
+			server = new ServerSocket(7000);
 			while(true) {
 				System.out.println( "[server 실행] : Client 연결 대기 중" );
 				socket = server.accept();

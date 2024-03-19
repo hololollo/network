@@ -18,7 +18,7 @@ public class MultiClient {
 		BufferedReader in = null;
 		
 		try {
-			socket = new Socket("192.168.20.207", 8257);
+			socket = new Socket("192.168.20.213", 7000);
 			System.out.println("[서버연결ok]");
 			
 			System.out.print("사용자명 입력 : ");

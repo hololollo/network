@@ -1,50 +1,131 @@
 package sec1;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 class LoginGUI extends JFrame implements ActionListener, KeyListener {
-	JPanel port_log = new JPanel();
-	JLabel port_label = new JLabel("유저입력");
-	JLabel port_label1 = new JLabel("포트입력");
-	JLabel port_label2 = new JLabel("주소입력");
-	JTextField port_num = new JTextField(15);
-	JTextField port_num1 = new JTextField(15);
-	JTextField port_num2 = new JTextField("###.###.###.###", 15);
-	JButton port_btn = new JButton("접속");
+	JPanel Login_GUIPanel = new JPanel();
+	JTextField NickName_Text = new JTextField(20);
+	JTextField Port_Text = new JTextField("####", 20);
+	JTextField IPAddress_Text = new JTextField("###.###.###.###", 20);
+	JLabel NickName_Label = new JLabel("유저 입력");
+	JLabel Port_Label = new JLabel("포트 입력");
+	JLabel IPAddress_Label = new JLabel("주소 입력");
+	JButton Login_GUI_Button = new JButton("접속!");
 	
 	public LoginGUI() {
 		setTitle("로그인 화면");
-		setLocationRelativeTo(null); // 위치 : Auto
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 닫기버튼 표시
-		setSize(300, 200); // 창 전체 가로 x 세로
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setSize(300, 300);
+		setResizable(false);
 		setVisible(true);
-		setResizable(true); // 창크기 조절 가능
-		// 패널
-		port_btn.addActionListener(this);
-		port_num.addKeyListener(this);
-		port_log.add(port_label);
-		port_log.add(port_num);
-		port_log.add(port_label1);		
-		port_log.add(port_num1);
-		port_log.add(port_label2);		
-		port_log.add(port_num2);		
-		port_log.add(port_btn);
-		port_btn.setPreferredSize(new Dimension(150, 30));
+		Login_GUI_Button.setPreferredSize(new Dimension(220, 40)); // 버튼 크기
+		Login_GUI_Button.addActionListener(this);
+		Login_GUI_Button.addKeyListener(this);
+		NickName_Text.addKeyListener(this);
+        Port_Text.addKeyListener(this);
+        IPAddress_Text.addKeyListener(this);
+        NickName_Label.setForeground(Color.BLUE);
+        Port_Label.setForeground(Color.BLUE);
+        IPAddress_Label.setForeground(Color.BLUE);
+		Login_GUIPanel.add(NickName_Label);
+		Login_GUIPanel.add(NickName_Text);
+		Login_GUIPanel.add(Port_Label);
+		Login_GUIPanel.add(Port_Text);
+		Login_GUIPanel.add(IPAddress_Label);
+		Login_GUIPanel.add(IPAddress_Text);
+		Login_GUIPanel.add(Login_GUI_Button);
+		add(Login_GUIPanel);
+	}
 
-		add(port_log);
+	@Override
+	public void keyTyped(KeyEvent e) {
 		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+             actionPerformed(new ActionEvent(Login_GUI_Button, ActionEvent.ACTION_PERFORMED, null));
+         }
+    }
+	@Override
+	public void keyReleased(KeyEvent e) {
+    }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		try {
+			if (e.getSource() == Login_GUI_Button) {
+				String nick = NickName_Text.getText().trim();
+				String ip = IPAddress_Text.getText().trim();
+				int port = Integer.parseInt(Port_Text.getText().trim());
+				new ChatClientGUI(nick, ip, port);
+				setVisible(false);
+			}
+		} catch (Exception a) {
+			// 만약 올바르지 않는 값이 입력되면 팝업창을 띄워줍니다.
+			JOptionPane.showMessageDialog(null, "올바르지 않은 입력입니다!");
+		}
+	}
 }
 
+
+class ChatClientGUI extends JFrame implements ActionListener, KeyListener { // 접속 시 화면
+	String NickName;
+	ClientBack CB = new ClientBack();
+	JLabel UserLabel = new JLabel("유저 목록");
+	JPanel ClientGUIPanel = new JPanel();
+	JLabel User = new JLabel(NickName);
+	JTextField Chat = new JTextField(20); // 메세지 입력창
+	JButton Enter = new JButton("전송");
+	TextArea UserList = new TextArea(5, 20);
+	TextArea ChatList = new TextArea(35, 25); // 세로 x 가로
+	
+
+	public ChatClientGUI(String NickName, String IPAddress, int Port) {
+		this.NickName = NickName;
+		Font font = new Font("돋움체", Font.BOLD, 20);
+		UserLabel.setFont(font);
+		setTitle("유저 화면");
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setSize(250, 800);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		ChatList.setEditable(false);
+		UserList.setEditable(false);
+		Chat.addKeyListener(this);
+		Enter.addActionListener(this);
+		Enter.addKeyListener(this);
+		
+		ClientGUIPanel.add(UserLabel);
+		ClientGUIPanel.add(UserList); // chatList위로 변경		
+		ClientGUIPanel.add(ChatList);
+		ClientGUIPanel.add(User);
+		ClientGUIPanel.add(Chat);
+		ClientGUIPanel.add(Enter);
+		add(ClientGUIPanel);
+		CB.setGui(this);
+		CB.getUserInfo(NickName, IPAddress, Port);
+		CB.start(); // 채팅창이 켜짐과 동시에 접속을 실행해줍니다.
+	}
+	
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -53,27 +134,45 @@ class LoginGUI extends JFrame implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
-	}
+        }
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		String Message = Chat.getText().trim();
+		if (e.getKeyCode() == KeyEvent.VK_ENTER && Message.length() > 0) {
+			CB.Transmit(NickName + " : " + Message + "\n");
+			Chat.setText(null);
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		String Message = Chat.getText().trim();
+		if (e.getSource() == Enter && Message.length() > 0) {
+			CB.Transmit(NickName + " : " + Message + "\n");
+			Chat.setText(null);
+		}
+	}
+	
+	public void AppendMessage(String Message) {
+		ChatList.append(Message);
 	}
 
-}	
-public class GUIClient {
+	public void AppendUserList(ArrayList NickName) {
+		// 유저목록을 유저리스트에 띄워줍니다.
+		String name;
+		UserList.setText(null);
+		for (int i = 0; i < NickName.size(); i++) {
+			name = (String) NickName.get(i);
+			UserList.append(name + "\n");
+		}
+	}
+	
+}
 
+public class GUIClient {
 	public static void main(String[] args) {
 		new LoginGUI();
 	}
-
 }

@@ -20,7 +20,7 @@ public class Server {
 				Scanner sc = new Scanner(System.in); // 키보드로 입력
 				
 				try {
-					server = new ServerSocket(7009); // 소켓이 열려있는지 여부를 확인하기 위해 try~catch사용
+					server = new ServerSocket(7000); // 소켓이 열려있는지 여부를 확인하기 위해 try~catch사용
 					System.out.println("[Server 실행] : Client 연결 대기 중 입니다.");
 					socket = server.accept(); // 일반 소켓(클라이언트가 연결이 가능한 상태 - 콘센트 역할)
 					System.out.println("[Cilent 연결]");

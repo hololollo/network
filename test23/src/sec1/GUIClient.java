@@ -134,16 +134,16 @@ class ChatClientGUI extends JFrame implements ActionListener, KeyListener { // ì
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
-        }
-
-	@Override
-	public void keyReleased(KeyEvent e) {
 		String Message = Chat.getText().trim();
 		if (e.getKeyCode() == KeyEvent.VK_ENTER && Message.length() > 0) {
 			CB.Transmit(NickName + " : " + Message + "\n");
+			AppendMessage(NickName + Message + "\n");
 			Chat.setText(null);
 		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 	}
 
 	@Override

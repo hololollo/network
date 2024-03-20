@@ -140,6 +140,7 @@ class ChatClientGUI extends JFrame implements ActionListener, KeyListener { // ì
 			AppendMessage(NickName + Message + "\n");
 			Chat.setText(null);
 		}
+		
 	}
 
 	@Override

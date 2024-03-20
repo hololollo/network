@@ -20,24 +20,26 @@ public class MyServer {
 		Scanner sc = new Scanner(System.in); // 키보드로 입력
 		
 		try {
-			server = new ServerSocket(6000); // 소켓이 열려있는지 여부를 확인하기 위해 try~catch사용
+			server = new ServerSocket(6000); // 특정포트번호로 서버 시작 소켓이 열려있는지 여부를 확인하기 위해 try~catch사용
 			System.out.println("[Server 실행] : Client 연결 대기 중 입니다.");
-			socket = server.accept(); // 일반 소켓(클라이언트가 연결이 가능한 상태 - 콘센트 역할)
-			System.out.println("[Cilent 연결]");
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // 읽어와라.
+			socket = server.accept(); // 일반 소켓(클라이언트가 연결이 가능한 상태 - 콘센트 역할) // 클라이언트 연결 대기
+			System.out.println("[Cilent 연결대기]");
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // 소켓에 들어온 스트림을 읽어와라.
 			out = new PrintWriter(socket.getOutputStream());
 			
 			while(true) {
-				String inMsg = in.readLine(); // 한 줄씩 읽는다.
+				// 수신
+				String inMsg = in.readLine(); //클라이언트로부터 온 메세지 한 줄씩 읽는다.(socket을 이용한 데이터 입출력)
 				if("quit".equalsIgnoreCase(inMsg)) { // 대소문자 구분 없이
 					break;
 				} 
 				System.out.println("[From Client : ] " + inMsg);
 				System.out.println("전송>>>");
 				
-				String outMsg = sc.nextLine();
-				out.println(outMsg);
-				out.flush(); // 비운다.
+				String outMsg = sc.nextLine(); // 클라이언트로 보낼 메세지 작성
+				out.println(outMsg); // 송신객체에 메세지 저장
+				out.flush(); // 클라이언트에게 송신 메세지 전달. 비운다.
+				//발신
 				if("quit".equalsIgnoreCase(outMsg)) {
 					break;
 				}

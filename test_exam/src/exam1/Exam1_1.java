@@ -8,7 +8,8 @@ public class Exam1_1 {
 	public static void main(String[] args) {
 	     output1();
 	    }
-
+	
+// length() 메서드는 String 클래스의 메서드이므로 이것은 배열에서 사용할 수 없습니다. 따라서 배열이 아닌 객체나 변수에서는 length 속성을 사용할 수 없습니다.
     public static void output1() {
         FileOutputStream fos = null;
         try {

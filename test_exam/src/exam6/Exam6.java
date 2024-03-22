@@ -19,7 +19,7 @@ public class Client {
 		BufferedReader br = null;
 		PrintWriter pw = null;
 		Socket socket = null;
-		int port = 3000;
+		int port = 3000; 
 		try {
 			socket = new Socket(port);
 			if(socket != null) {

@@ -12,28 +12,28 @@
 </head>
 <body>
 <c:set scope="application" var="num3" value="30" />
-<%@ include file="menu.jsp" %>
 <%
 	pageContext.setAttribute("num1", 9);
 	pageContext.setAttribute("num2", "10");
 	pageContext.setAttribute("nullStr", null);
 	pageContext.setAttribute("emptyStr", "");
 	pageContext.setAttribute("lengthZero", new Integer[0]);
-	pageContext.setAttribute("sizeZero", new ArrayList());
+	pageContext.setAttribute("sizeZero", new ArrayList<>());
 	
-	session.setAttribute("sid", "kang"); // "kang"이라는 아이디로 로그인 중
+	session.setAttribute("sid", "kim");	//"kim"이라는 아이디로 로그인 중
 %>
+<%@ include file="menu.jsp" %>
 <hr>
 <h2>표현언어의 비교문장</h2>
 <div>
 	<c:if test="${sid.equals('admin') }">
 		<p>관리자 로그인 중</p>
 	</c:if>
-	<c:if test="${not empty sid }">
-	<p>${sid } 님 로그인 중</p>
+	<c:if test="${not empty sid}">
+		<p>${sid } 님 로그인 중</p>
 	</c:if>
-	<c:if test="${empty sid }">
-	<p>현재 로그인 중이 아닙니다.</p>
+	<c:if test="${empty sid}">
+		<p>현재 로그인 중이 아닙니다.</p>
 	</c:if>
 </div>
 <hr>
@@ -47,7 +47,7 @@
 <hr>
 <div>
 	<h3>삼항 연산자</h3>
-	<p>num1 &gt; num2 ? "참" : "거짓" => ${num1 gt num2 ? "num1이 더 크다" : "num2가 더 크다" }</p>
+	<p>num1이 크거나 같다 num2 ? "참" : "거짓" => ${num1 gt num2 ? "num1이 더 크다" : "num2이 더 크다" }</p>
 </div>
 <div>
 	<h3>null 연산자</h3>

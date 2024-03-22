@@ -10,7 +10,10 @@ test.txt => test.txt내용3.jpg 참조
  */
 public class Exam3 {
 	public static void main(String[] args) {
-
+		output1();
+	}
+	public static void output1() {
+		
 	}
 
 }

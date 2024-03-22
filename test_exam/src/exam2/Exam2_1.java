@@ -8,8 +8,8 @@ public class Exam2_1 {
 		output1();
 	}
 	public static void output1() {
+		FileOutputStream fos = null; // fos가 try~catch 블록 에서 생성되어있어서 닫기가 불가능해진다. 
 		try {
-			FileOutputStream fos = null;
 			fos = new FileOutputStream("test2.txt");
 			String str = "점심뭐먹어?";
 			byte[] utf8Bytes = str.getBytes("UTF-8"); // UTF-8로 인코딩된 바이트 배열 생성
@@ -19,6 +19,14 @@ public class Exam2_1 {
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
+		}finally {
+            try {
+                if(fos != null) {
+                fos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 		}
 	}
 }

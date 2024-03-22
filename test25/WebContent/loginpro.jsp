@@ -15,12 +15,14 @@ String userName = "강범준";
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	String id = request.getParameter("id");
+	String id = request.getParameter("id"); 
 	String name = request.getParameter("name");
 	
 	if(id.equals(userId) && name.equals(userName)) {
-		session.setAttribute("id", id);
-		session.setAttribute("name", name);
+		session.setAttribute("sid", id);
+		session.setAttribute("sname", name);
+		response.sendRedirect("test10.jsp");
+	} else {
 		response.sendRedirect("login.jsp");
 	}
 %>	

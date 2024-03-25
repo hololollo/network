@@ -11,4 +11,10 @@
 	<li><a href="test05.jsp">표현언어의 비교문장</a></li>	
 	<li><a href="test06.jsp">jstl의 core 태그(c:)</a></li>	
 	<li><a href="test07.jsp">jstl의 fmt태그</a></li>	
+	<li><a href="test08.jsp">jstl의 fn 태그</a></li>
+	<li><a href="test09.jsp">jstl의 xml 태그</a></li>
+	<li><a href="test10.jsp">jstl의 sql 태그</a></li>
+	<li><a href="test11.jsp">액션태그 - useBean, forward</a></li>
+	<li><a href="test12.jsp">액션태그 - forward, param</a></li>
+	<li><a href="test13.jsp">액션태그 - setProperty, getProperty</a></li>
 </ul>
